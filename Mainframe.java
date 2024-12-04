@@ -25,7 +25,8 @@ public class Mainframe extends JFrame {
         panel.setLayout(null);
 
         // 添加元件
-        JLabel userLabel = new JLabel("User:");
+        //setBounds 設定元件位置跟 大小
+        JLabel userLabel = new JLabel("User:"); 
         userLabel.setBounds(10, 20, 80, 25);
         panel.add(userLabel);
 
