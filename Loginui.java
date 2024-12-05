@@ -52,7 +52,7 @@ public class Loginui extends JFrame {
         loginButton.addActionListener((ActionEvent e) -> {
             String username = userText.getText();
             String password = new String(passwordText.getPassword()); // 將 char[] 轉為 String
-            if (admin.getAdminName().equals(username) && admin.getAdminPassword().equals(password)) {
+            if (admin.getAdminUser().equals(username) && admin.getAdminPassword().equals(password)) {
                 this.setVisible(false);
                 MainSystemui mainSystemui = new MainSystemui();
                 mainSystemui.setVisible(true);
@@ -70,19 +70,25 @@ public class Loginui extends JFrame {
     }
 }
 class Admin{
-    private final String adminName;
+    private final String adminUser;
     private final String adminPassword;
+    private final String adminName;
+
 
     public Admin() {
-        this.adminName = "admin";
+        this.adminUser = "admin";
         this.adminPassword = "password";
+        this.adminName = "QAQBlaze";
     }
 
-    public String getAdminName() {
-        return adminName;
+    public String getAdminUser() {
+        return adminUser;
     }
 
     public String getAdminPassword() {
         return adminPassword;
+    }
+    public String getAdminName(){
+        return adminName;
     }
 }
