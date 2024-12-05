@@ -2,11 +2,11 @@ import java.awt.Container;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Mainframe extends JFrame {
+public class Loginui extends JFrame {
     private JPanel panel = new JPanel();
     private Container cp;
 
-    public Mainframe() {
+    public Loginui() {
         init();
     }
 
@@ -64,7 +64,7 @@ public class Mainframe extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Mainframe().setVisible(true);
+        new Loginui().setVisible(true);
     }
 }
 
