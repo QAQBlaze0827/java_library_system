@@ -5,7 +5,8 @@ import javax.swing.*;
 
 public class MainSystemui extends JFrame {
     private Container cp;
-    private JPanel userPanel,functionPanel= new JPanel();
+    private JPanel userPanel= new JPanel();
+    private JPanel functionPanel = new JPanel();
 
     public MainSystemui() {
         init();
@@ -30,14 +31,14 @@ public class MainSystemui extends JFrame {
         userPanel.setLayout(null); // 記得設置面板的佈局
         userPanel.add(label); // 將標籤添加到面板
         //功能 panel
-        // functionPanel.setBounds(0, 50, 400, 700); // 設置面板大小
-        // functionPanel.setBackground(Color.lightGray);
-        // functionPanel.setLayout(new BoxLayout(functionPanel, BoxLayout.Y_AXIS)); // 使用 BoxLayout，設置為 Y 軸排列
-        // cp.add(functionPanel); // 將面板添加到容器
-        // JButton addBookButton = new JButton("Add Book"); // 創建按鈕
-        // addBookButton.setBounds(0, 0, 100, 30); // 設置按鈕大小和位置
-        // // addBookButton.setAlignmentX(CENTER_ALIGNMENT); // 設置按鈕置中
-        // functionPanel.add(addBookButton); // 將按鈕添加到面板
+        functionPanel.setBounds(0, 50, 400, 700); // 設置面板大小
+        functionPanel.setBackground(Color.lightGray);
+        functionPanel.setLayout(new BoxLayout(functionPanel, BoxLayout.Y_AXIS)); // 使用 BoxLayout，設置為 Y 軸排列
+        cp.add(functionPanel); // 將面板添加到容器
+        JButton addBookButton = new JButton("Add Book"); // 創建按鈕
+        addBookButton.setBounds(0, 0, 100, 30); // 設置按鈕大小和位置
+        addBookButton.setAlignmentX(CENTER_ALIGNMENT); // 設置按鈕置中
+        functionPanel.add(addBookButton); // 將按鈕添加到面板
 
         
 
