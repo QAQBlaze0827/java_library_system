@@ -3,7 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Loginui extends JFrame {
-    private JPanel panel = new JPanel();
+    private final JPanel panel = new JPanel();
     private Container cp;
 
     public Loginui() {
@@ -13,8 +13,8 @@ public class Loginui extends JFrame {
     private void init() {
         // 視窗基本設定
         this.setTitle("Login Library System");
-        this.setSize(600, 350);
-        this.setLocation(500, 500);
+        this.setSize(400, 200);
+        this.setLocation(700, 250);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // 處理版面
@@ -31,7 +31,7 @@ public class Loginui extends JFrame {
         panel.add(userLabel);
 
         JTextField userText = new JTextField(20);
-        userText.setBounds(100, 20, 300, 25);
+        userText.setBounds(100, 20, 200, 25);
         panel.add(userText);
 
         JLabel passwordLabel = new JLabel("Password:");
@@ -39,7 +39,7 @@ public class Loginui extends JFrame {
         panel.add(passwordLabel);
 
         JPasswordField passwordText = new JPasswordField(20);
-        passwordText.setBounds(100, 50, 300, 25);
+        passwordText.setBounds(100, 50, 200, 25);
         panel.add(passwordText);
 
         JButton loginButton = new JButton("login");
@@ -49,16 +49,18 @@ public class Loginui extends JFrame {
         // Admin 帳號驗證
         Admin admin = new Admin();
 
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String username = userText.getText();
-                String password = new String(passwordText.getPassword()); // 將 char[] 轉為 String
-                if (admin.getAdminName().equals(username) && admin.getAdminPassword().equals(password)) {
-                    System.out.println("Login Success");
-                } else {
-                    System.out.println("Login Fail");
-                }
+        loginButton.addActionListener((ActionEvent e) -> {
+            String username = userText.getText();
+            String password = new String(passwordText.getPassword()); // 將 char[] 轉為 String
+            if (admin.getAdminName().equals(username) && admin.getAdminPassword().equals(password)) {
+                this.setVisible(false);
+                MainSystemui mainSystemui = new MainSystemui();
+                mainSystemui.setVisible(true);
+                System.out.println("Login Success");
+            } else {
+                System.out.println("Login Fail");
+                userText.setText("");
+                passwordText.setText("");
             }
         });
     }
@@ -67,15 +69,9 @@ public class Loginui extends JFrame {
         new Loginui().setVisible(true);
     }
 }
-
-class People {
-    private String username;
-    private String password;
-}
-
-class Admin extends People {
-    private String adminName;
-    private String adminPassword;
+class Admin{
+    private final String adminName;
+    private final String adminPassword;
 
     public Admin() {
         this.adminName = "admin";
