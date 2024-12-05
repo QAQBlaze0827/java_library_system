@@ -5,8 +5,8 @@ import javax.swing.*;
 
 public class MainSystemui extends JFrame {
     private Container cp;
-    private JPanel userPanel= new JPanel();
-    private JPanel functionPanel = new JPanel();
+    private final JPanel userPanel= new JPanel();
+    private final JPanel functionPanel = new JPanel();
 
     public MainSystemui() {
         init();
