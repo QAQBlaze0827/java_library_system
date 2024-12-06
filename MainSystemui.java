@@ -1,28 +1,29 @@
-import java.awt.Color;
-import java.awt.Container;
+import java.awt.*;
 import javax.swing.*;
 
 
 public class MainSystemui extends JFrame {
     private Container cp;
+    private CardLayout cardLayout;
     private final JPanel userPanel= new JPanel();
     private final JPanel functionPanel = new JPanel();
+    private JPanel contentPanel;
 
     public MainSystemui() {
         init();
     }
 
     private void init() {
+        //初始化視窗
         this.setTitle("Library System");
         this.setSize(1000, 750); // 設定初始大小
         this.setLocation(500, 200); // 設定視窗初始位置
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        // 容器和佈局
         cp = this.getContentPane(); 
         cp.setLayout(null); 
 
         //使用者 panel
+        //用來做歡迎小介面的
         userPanel.setBounds(0, 0, 200, 50);
         userPanel.setBackground(new Color(161,196,253)); 
         cp.add(userPanel); 
@@ -33,6 +34,8 @@ public class MainSystemui extends JFrame {
         userPanel.add(label);
 
         //-----------------功能 panel
+        //這邊應該可以在優化
+
         functionPanel.setBounds(0, 50, 200, 700);
         functionPanel.setBackground(Color.lightGray);
         functionPanel.setLayout(null);
@@ -71,36 +74,42 @@ public class MainSystemui extends JFrame {
         //-----------------功能 panel end
 
         //------------------右邊的panel
+        cardLayout = new CardLayout();
+        contentPanel = new JPanel(cardLayout);
+        contentPanel.setBounds(200, 0, 800, 750);
+        cp.add(contentPanel);
+
         //新增書籍的panel
         JPanel addBookPanel = new JPanel();
         addBookPanel.setBounds(200, 0, 800, 750);
         addBookPanel.setBackground(Color.white);
         cp.add(addBookPanel);
         addBookPanel.setLayout(null);
-        addBookPanel.setVisible(false); // 一開始不顯示
+        addBookPanel.setVisible(true); // 一開始不顯示
+        contentPanel.add(addBookPanel, "AddBook");
         //書籍的panel中的元件
         JLabel title = new JLabel("Add Book System");
         title.setBounds(10, 10, 200, 25);
         title.setAlignmentX(CENTER_ALIGNMENT);
         addBookPanel.add(title);
-        JLabel bookNameLabel = new JLabel("Book Name:"); // 創建標籤
-        bookNameLabel.setBounds(10, 50, 80, 25); // 設置標籤大小和位置
-        addBookPanel.add(bookNameLabel); // 將標籤添加到面板
-        JTextField bookNameText = new JTextField(20); // 創建文字框
-        bookNameText.setBounds(100, 50, 200, 25); // 設置文字框大小和位置
-        addBookPanel.add(bookNameText); // 將文字框添加到面板
+        JLabel bookNameLabel = new JLabel("Book Name:");
+        bookNameLabel.setBounds(10, 50, 80, 25);
+        addBookPanel.add(bookNameLabel);
+        JTextField bookNameText = new JTextField(20); 
+        bookNameText.setBounds(100, 50, 200, 25); 
+        addBookPanel.add(bookNameText); 
 
-        JLabel bookID = new JLabel("Book ID"); //創建 bookID 的label
-        bookID.setBounds(10, 80, 80, 25); // 設置 bookID 的大小和位置
-        addBookPanel.add(bookID); // 將 bookID 的label 添加到面板
-        JTextField bookIDText = new JTextField(20); // 創建 bookID 的文字框
-        bookIDText.setBounds(100, 80, 200, 25); // 設置 bookID 的文字框大小和位置
-        addBookPanel.add(bookIDText); // 將 bookID 的文字框添加到面板
+        JLabel bookID = new JLabel("Book ID"); 
+        bookID.setBounds(10, 80, 80, 25); 
+        addBookPanel.add(bookID);
+        JTextField bookIDText = new JTextField(20);
+        bookIDText.setBounds(100, 80, 200, 25); 
+        addBookPanel.add(bookIDText);
 
-        JButton addBook = new JButton("Add Book"); // 創建新增書籍按鈕
-        addBook.setBounds(10, 110, 80, 25); // 設置新增書籍按鈕大小和位置
-        addBook.setAlignmentX(LEFT_ALIGNMENT); // 設置新增書籍按鈕至左
-        addBookPanel.add(addBook); // 將新增書籍按鈕添加到面板
+        JButton addBook = new JButton("Add Book"); 
+        addBook.setBounds(10, 110, 80, 25); 
+        addBook.setAlignmentX(LEFT_ALIGNMENT); 
+        addBookPanel.add(addBook); 
         //書籍的panel中的元件 end
 
         //刪除書籍的paenl
@@ -109,22 +118,15 @@ public class MainSystemui extends JFrame {
         deleteBookPanel.setBackground(Color.green);
         cp.add(deleteBookPanel);
         deleteBookPanel.setLayout(null);
-        deleteBookPanel.setVisible(false); // 一開始不顯示
+        deleteBookPanel.setVisible(true); // 一開始不顯示
+        contentPanel.add(deleteBookPanel, "DeleteBook");
         //------------------
         //------------------右邊的panel end
 
         
         //監控 控制右邊panel 的按鈕
-        addBookButton.addActionListener((e) -> {
-            // 顯示新增書籍的 panel
-            addBookPanel.setVisible(true);
-            deleteBookPanel.setVisible(false);
-        });
-        deleteBookButton.addActionListener((e) -> {
-            // 顯示刪除書籍的 panel
-            deleteBookPanel.setVisible(true);
-            addBookPanel.setVisible(false);
-        });
+        addBookButton.addActionListener((e) -> cardLayout.show(contentPanel, "AddBook"));
+        deleteBookButton.addActionListener((e) -> {cardLayout.show(contentPanel, "DeleteBook");});
         //監控新增的按鈕
         addBook.addActionListener((e) ->{
             // 新增書籍
@@ -138,11 +140,9 @@ public class MainSystemui extends JFrame {
             bookNameText.setText("");
             bookIDText.setText("");
         });
-        
         //底下這不知道幹嘛的
         this.setResizable(true); // 確保視窗大小可以調整
     }
-
     public static void main(String[] args) {
         new MainSystemui().setVisible(true);
     }
