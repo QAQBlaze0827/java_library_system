@@ -9,7 +9,11 @@ public class Admin {
         this.adminPassword = "password";
         this.adminName = "QAQBlaze";
     }
-
+    public Admin(String adminUser, String adminPassword, String adminName) {
+        this.adminUser = adminUser;
+        this.adminPassword = adminPassword;
+        this.adminName = adminName;
+    }
     public String getAdminUser() {
         return adminUser;
     }
