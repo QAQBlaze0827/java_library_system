@@ -8,6 +8,8 @@ public class MainSystemui extends JFrame {
     private final JPanel userPanel= new JPanel();
     private final JPanel functionPanel = new JPanel();
     private JPanel contentPanel;
+    private Library library = new Library(); // 建立 Library 物件 用來借書還書新增書籍
+
 
     public MainSystemui() {
         init();
@@ -85,9 +87,9 @@ public class MainSystemui extends JFrame {
         addBookPanel.setBackground(Color.white);
         cp.add(addBookPanel);
         addBookPanel.setLayout(null);
-        addBookPanel.setVisible(true); // 一開始不顯示
+        addBookPanel.setVisible(true); 
         contentPanel.add(addBookPanel, "AddBook");
-        //書籍的panel中的元件
+            //書籍的panel中的元件
         JLabel title = new JLabel("Add Book System");
         title.setBounds(10, 10, 200, 25);
         title.setAlignmentX(CENTER_ALIGNMENT);
@@ -107,38 +109,113 @@ public class MainSystemui extends JFrame {
         addBookPanel.add(bookIDText);
 
         JButton addBook = new JButton("Add Book"); 
-        addBook.setBounds(10, 110, 80, 25); 
+        addBook.setBounds(10, 110, 200, 25); 
         addBook.setAlignmentX(LEFT_ALIGNMENT); 
         addBookPanel.add(addBook); 
         //書籍的panel中的元件 end
-
+        
         //刪除書籍的paenl
         JPanel deleteBookPanel = new JPanel();
         deleteBookPanel.setBounds(200, 0, 800, 750);
-        deleteBookPanel.setBackground(Color.green);
+        deleteBookPanel.setBackground(Color.white);
         cp.add(deleteBookPanel);
         deleteBookPanel.setLayout(null);
         deleteBookPanel.setVisible(true); // 一開始不顯示
         contentPanel.add(deleteBookPanel, "DeleteBook");
+        //刪除書籍的panel中的元件
+        JLabel deleteTitle = new JLabel("Delete Book System");
+        deleteTitle.setBounds(10, 10, 200, 25);
+        deleteTitle.setAlignmentX(CENTER_ALIGNMENT);
+        deleteBookPanel.add(deleteTitle);
+        JLabel deleteBookID = new JLabel("Book ID");
+        deleteBookID.setBounds(10, 50, 80, 25);
+        deleteBookPanel.add(deleteBookID);
+        JTextField deleteBookIDText = new JTextField(20);
+        deleteBookIDText.setBounds(100, 50, 200, 25);
+        deleteBookPanel.add(deleteBookIDText);
+        JButton deleteBook = new JButton("Delete Book");
+        deleteBook.setBounds(10, 80, 200, 25);
+        deleteBook.setAlignmentX(LEFT_ALIGNMENT);
+        deleteBookPanel.add(deleteBook);
+        //刪除書籍的panel中的元件 end
         //------------------
+        //查詢書籍的panel
+        JPanel searchBookPanel = new JPanel();
+        searchBookPanel.setBounds(200, 0, 800, 750);
+        searchBookPanel.setBackground(Color.white);
+        cp.add(searchBookPanel);
+        searchBookPanel.setLayout(null);
+        searchBookPanel.setVisible(true); // 一開始不顯示
+        contentPanel.add(searchBookPanel, "SearchBook");
+        //查詢書籍的panel中的元件
+        JLabel searchTitle = new JLabel("Search Book System");
+        searchTitle.setBounds(10, 10, 200, 25);
+        searchTitle.setAlignmentX(CENTER_ALIGNMENT);
+        searchBookPanel.add(searchTitle);
+        JLabel searchBookID = new JLabel("Book ID");
+        searchBookID.setBounds(10, 50, 80, 25);
+        searchBookPanel.add(searchBookID);
+        JTextField searchBookIDText = new JTextField(20);
+        searchBookIDText.setBounds(100, 50, 200, 25);
+        searchBookPanel.add(searchBookIDText);
+        JButton searchBook = new JButton("Search Book");
+        searchBook.setBounds(10, 80, 200, 25);
+        searchBook.setAlignmentX(LEFT_ALIGNMENT);
+        searchBookPanel.add(searchBook);
+        //查詢書籍的panel中的元件 end
+        //------------------
+
         //------------------右邊的panel end
 
         
         //監控 控制右邊panel 的按鈕
         addBookButton.addActionListener((e) -> cardLayout.show(contentPanel, "AddBook"));
         deleteBookButton.addActionListener((e) -> {cardLayout.show(contentPanel, "DeleteBook");});
+        searchBookButton.addActionListener((e) -> {cardLayout.show(contentPanel, "SearchBook");});
+        //監控 控制右邊panel 的按鈕 end
         //監控新增的按鈕
-        addBook.addActionListener((e) ->{
-            // 新增書籍
-            int book_ID = Integer.parseInt(bookIDText.getText());
-            Book book = new Book();
-            book.addBook(bookNameText.getText(), book_ID);
-            System.out.println(book.getBookName());
-            System.out.println(book.getBookID());
-            System.out.println(book.getIsBorrowed());
-            System.out.println("Add Book Success");
-            bookNameText.setText("");
-            bookIDText.setText("");
+        addBook.addActionListener((e) -> {
+            try {
+                String bookName = bookNameText.getText();
+                int book_ID = Integer.parseInt(bookIDText.getText());
+        
+                // 呼叫 Library 的 addBook 方法
+                library.addBook(bookName, book_ID);
+                System.out.println("Book added: Name = " + bookName + ", ID = " + book_ID);
+        
+                // 清空輸入框
+                bookNameText.setText("");
+                bookIDText.setText("");
+            } catch (NumberFormatException ex) {
+                System.out.println("Invalid Book ID. Please enter a numeric value.");
+            }
+        });
+        //監控刪除的按鈕
+        deleteBook.addActionListener((e) -> {
+            try {
+                int book_ID = Integer.parseInt(deleteBookIDText.getText());
+        
+                // 呼叫 Library 的 deleteBook 方法
+                library.deleteBook(book_ID);
+        
+                // 清空輸入框
+                deleteBookIDText.setText("");
+            } catch (NumberFormatException ex) {
+                System.out.println("Invalid Book ID. Please enter a numeric value.");
+            }
+        });
+        searchBook.addActionListener((e) ->{
+            try {
+                // int book_ID = Integer.parseInt(searchBookIDText.getText());
+        
+                // 呼叫 Library 的 deleteBook 方法
+                library.displayBooks();
+        
+                // 清空輸入框
+                searchBookIDText.setText("");
+            } catch (NumberFormatException ex) {
+                System.out.println("Invalid Book ID. Please enter a numeric value.");
+            }
         });
         //底下這不知道幹嘛的
         this.setResizable(true); // 確保視窗大小可以調整
