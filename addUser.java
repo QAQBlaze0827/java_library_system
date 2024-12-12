@@ -31,7 +31,7 @@ public class addUser{
     public static void main(String[] args){ //後須刪除
         String path="user.csv";
         List<User> allUsers=new ArrayList<>();
-        allUsers.add(new User(1,"test","test"));
+        allUsers.add(new User(2,"test2","test2"));
         try (BufferedWriter bw=new BufferedWriter(new FileWriter(path))){
             //標題
             bw.write("ID,name,password");
