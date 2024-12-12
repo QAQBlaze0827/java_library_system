@@ -9,6 +9,16 @@ public class Book {
         this.bookID = bookID;
         this.isBorrowed = false;
     }
+    public void deleteBook(int bookid){
+        if (bookid == this.bookID){
+            this.bookName = null;
+            this.bookID = 0;
+            this.isBorrowed = false;
+        }
+        else{
+            System.out.println("Book ID not found");
+        }
+    }
     public String getBookName(){
         return bookName;
     }
@@ -17,5 +27,8 @@ public class Book {
     }
     public boolean getIsBorrowed(){
         return isBorrowed;
+    }
+    public void borrowBook(){
+        this.isBorrowed = true;
     }
 }

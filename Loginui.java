@@ -5,6 +5,7 @@ import javax.swing.*;
 public class Loginui extends JFrame {
     private final JPanel panel = new JPanel();
     private Container cp;
+    private final JPanel buttonpanel = new JPanel();
 
     public Loginui() {
         init();
@@ -20,9 +21,12 @@ public class Loginui extends JFrame {
         // 處理版面
         cp = this.getContentPane();
         cp.setLayout(null);
-        panel.setBounds(0, 0, 400, 400);
-        cp.add(panel);
+        //改變使用者登入
+        buttonpanel.setBounds(20,0,400,400);
+        panel.setBounds(20, 20, 400, 400);
         panel.setLayout(null);
+        cp.add(panel);
+        cp.add(buttonpanel);
 
         // 添加元件
         //setBounds 設定元件位置跟 大小
