@@ -3,54 +3,62 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
-public class User{
+class User {
     private int uid;
     private String uname;
     private String upassword;
-    public User(int uid, String uname, String upassword){
-        this.uid=uid;
-        this.uname=uname;
-        this.upassword=upassword;
-    }
-    public int getuid(){
-        return uid;
-    }
-    public String getuname(){
-        return uname;
-    }
-    public String getupassword(){
-        return upassword;
-    }
-    public String toCsvRow(){
-        return uid+","+uname+","+upassword;
-    }
-   
-}
-public class addUser{
-    public static void main(String[] args){ //後須刪除
-        String path="user.csv";
-        List<User> allUsers=new ArrayList<>();
-        allUsers.add(new User(2,"test2","test2"));
-        try (BufferedWriter bw=new BufferedWriter(new FileWriter(path))){
-            //標題
-            bw.write("ID,name,password");
-            bw.newLine();
 
-            //寫資料
-            for(User user:allUsers){
+    // 建構子
+    public User(int uid, String uname, String upassword) {
+        this.uid = uid;
+        this.uname = uname;
+        this.upassword = upassword;
+    }
+
+    // 將 User 轉為 CSV 行
+    public String toCsvRow() {
+        return uid + "," + uname + "," + upassword;
+    }
+}
+
+public class AddUser {
+    public static void main(String[] args) {
+        String path = "user.csv";
+
+        // 新增用戶資料
+        List<User> allUsers = new ArrayList<>();
+        allUsers.add(new User(2, "test2", "test2"));
+
+        // 檢查檔案是否已存在
+        boolean fileExists = new File(path).exists();
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))) {
+            // 如果檔案不存在或為空，寫入標題
+            if (!fileExists || isFileEmpty(path)) {
+                bw.write("ID,Name,Password");
+                bw.newLine();
+            }
+
+            // 寫入用戶資料
+            for (User user : allUsers) {
                 bw.write(user.toCsvRow());
                 bw.newLine();
             }
-            System.out.println("寫入成功");
-        
 
-        }
-        catch(IOException e){
+            System.out.println("寫入成功！");
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
-    
 
+    // 檢查檔案是否為空
+    private static boolean isFileEmpty(String path) throws IOException {
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            return br.readLine() == null; // 如果第一行為 null，表示檔案為空
+        }
+    }
 }

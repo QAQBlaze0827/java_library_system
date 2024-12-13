@@ -4,10 +4,15 @@ public class Book {
     private int bookID;
     private boolean isBorrowed;
 
-    public void addBook(String bookName, int bookID) {
+    // public void addBook(String bookName, int bookID) {
+    //     this.bookName = bookName;
+    //     this.bookID = bookID;
+    //     this.isBorrowed = false;
+    // }
+    public Book(String bookName, int bookID, boolean isBorrowed) {
         this.bookName = bookName;
         this.bookID = bookID;
-        this.isBorrowed = false;
+        this.isBorrowed = isBorrowed;
     }
     public void deleteBook(int bookid){
         if (bookid == this.bookID){
@@ -30,5 +35,11 @@ public class Book {
     }
     public void borrowBook(){
         this.isBorrowed = true;
+    }
+    //新增資料進檔案(改格式)
+    public String toCsvRow(){
+        
+        return bookName+","+bookID+","+isBorrowed;
+
     }
 }
