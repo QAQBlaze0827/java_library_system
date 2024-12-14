@@ -10,12 +10,12 @@ import java.util.List;
 
 
 public class addUser {
-    public static void main(String[] args) {
+    public void addUsertolist(String username, String password) {
         String path = "user.csv";
 
         // 新增用戶資料
         List<User> allUsers = new ArrayList<>();
-        allUsers.add(new User(2, "test2", "test2"));
+        allUsers.add(new User(2, username, password));
 
         // 檢查檔案是否已存在
         boolean fileExists = new File(path).exists();
