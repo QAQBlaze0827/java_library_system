@@ -1,7 +1,7 @@
 class User {
-    private int uid;
-    private String uname;
-    private String upassword;
+    private final int uid;
+    private final String uname;
+    private final String upassword;
 
     // 建構子
     public User(int uid, String uname, String upassword) {
