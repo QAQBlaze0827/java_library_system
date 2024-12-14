@@ -7,23 +7,7 @@ import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-class User {
-    private int uid;
-    private String uname;
-    private String upassword;
 
-    // 建構子
-    public User(int uid, String uname, String upassword) {
-        this.uid = uid;
-        this.uname = uname;
-        this.upassword = upassword;
-    }
-
-    // 將 User 轉為 CSV 行
-    public String toCsvRow() {
-        return uid + "," + uname + "," + upassword;
-    }
-}
 
 public class AddUser {
     public static void main(String[] args) {
