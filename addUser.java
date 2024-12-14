@@ -1,21 +1,21 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.FileReader;
 
 
 
-public class AddUser {
-    public static void main(String[] args) {
+public class addUser {
+    public void addUsertolist(String username, String password) {
         String path = "user.csv";
 
         // 新增用戶資料
         List<User> allUsers = new ArrayList<>();
-        allUsers.add(new User(2, "test2", "test2"));
+        allUsers.add(new User(2, username, password));
 
         // 檢查檔案是否已存在
         boolean fileExists = new File(path).exists();

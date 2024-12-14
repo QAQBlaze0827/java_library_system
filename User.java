@@ -1,10 +1,16 @@
 import java.util.ArrayList;
 import java.util.List;
 class User {
+<<<<<<< HEAD
     private int uid;
     private String uname;
     private String upassword;
     private List<Book> borrowedBooks;
+=======
+    private final int uid;
+    private final String uname;
+    private final String upassword;
+>>>>>>> df5f1e32160a3d9669dd9a947a54dbbb9c3ac8ad
 
     // 建構子
     public User(int uid, String uname, String upassword) {

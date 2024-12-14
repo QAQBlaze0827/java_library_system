@@ -11,11 +11,13 @@ public class Library {
     // 新增書籍
     public void addBook(String bookName, int bookID) {
         if (books.containsKey(bookID)) {
+            
             System.out.println("Book with ID " + bookID + " already exists.");
         } else {
-            Book book = new Book();
-            book.addBook(bookName, bookID);
-            books.put(bookID, book);
+            AddBook addBookInstance = new AddBook();
+            addBookInstance.addBooktolist(bookName , bookID , false);
+            // Book book = new Book(bookName, bookID, false); //舊的
+            // books.put(bookID, book); //舊的
             System.out.println("Book \"" + bookName + "\" added successfully.");
         }
     }
@@ -51,7 +53,7 @@ public class Library {
         Book book = books.get(bookID);
         if (book != null) {
             if (book.getIsBorrowed()) {
-                book.addBook(book.getBookName(), book.getBookID()); // 保持書籍資訊不變
+                // book.addBook(book.getBookName(), book.getBookID()); // 保持書籍資訊不變
                 System.out.println("Book \"" + book.getBookName() + "\" returned successfully.");
             } else {
                 System.out.println("Book \"" + book.getBookName() + "\" was not borrowed.");

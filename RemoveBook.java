@@ -13,7 +13,7 @@ public class RemoveBook {
             System.out.println(book.getBookName() + "," + book.getBookID() + "," + book.getIsBorrowed());
         }
 
-        int bookIdToDelete = 100; // 要刪除的書本ID
+        int bookIdToDelete = 1234; // 要刪除的書本ID
         boolean bookIdIsDeleted = deleteBook(loadAllBooks, bookIdToDelete);
 
         if (bookIdIsDeleted) {
