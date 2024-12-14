@@ -42,4 +42,13 @@ public class Book {
         return bookName+","+bookID+","+isBorrowed;
 
     }
+    //解析 CSV 文件中的行
+    public static Book fromCsvRow(String csvRow){
+        String[] parts=csvRow.split(",");
+        String bookName=parts[0];
+        int bookID=Integer.parseInt(parts[1]);
+        boolean isBorrowed=Boolean.parseBoolean(parts[2]);
+        return new Book(bookName, bookID, isBorrowed); // 修正後
+
+    }
 }

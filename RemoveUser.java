@@ -19,7 +19,7 @@ public class RemoveUser{
             saveUserToCsv(LoadAllUsers,path); //更新文件
 
         }else{
-            System.out.println("未找到書本");
+            System.out.println("未找到使用者");
 
         }
 
