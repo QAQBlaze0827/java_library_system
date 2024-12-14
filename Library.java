@@ -13,8 +13,7 @@ public class Library {
         if (books.containsKey(bookID)) {
             System.out.println("Book with ID " + bookID + " already exists.");
         } else {
-            Book book = new Book();
-            book.addBook(bookName, bookID);
+            Book book = new Book(bookName, bookID, false);
             books.put(bookID, book);
             System.out.println("Book \"" + bookName + "\" added successfully.");
         }
@@ -51,7 +50,7 @@ public class Library {
         Book book = books.get(bookID);
         if (book != null) {
             if (book.getIsBorrowed()) {
-                book.addBook(book.getBookName(), book.getBookID()); // 保持書籍資訊不變
+                // book.addBook(book.getBookName(), book.getBookID()); // 保持書籍資訊不變
                 System.out.println("Book \"" + book.getBookName() + "\" returned successfully.");
             } else {
                 System.out.println("Book \"" + book.getBookName() + "\" was not borrowed.");
